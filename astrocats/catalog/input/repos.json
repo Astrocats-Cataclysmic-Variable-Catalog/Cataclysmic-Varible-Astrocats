@@ -1,0 +1,14 @@
+{
+    "output":[
+        "catalog-test-output"
+    ],
+    "boneyard":[
+        ""
+    ],
+    "external":[
+        ""
+    ],
+    "internal":[
+        "catalog-test-input"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "internal": {
+        "nice_name": "%pre metadata and photometry",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.general_data",
+        "function": "do_internal",
+        "repo": "input/cv-internal",
+        "priority": 1
+    },
+    "crts": {
+        "nice_name": "%pre CRTS",
+        "active": true,
+        "update": true,
+        "archived": false,
+        "module": "cataclysmic.tasks.crts",
+        "function": "do_crts",
+        "repo": "input/cv-external",
+        "always_journal": true,
+        "priority": 28
+    },
+    "merge_duplicates": {
+        "nice_name": "Merging duplicates",
+        "active": false,
+        "update": false,
+        "module": "catalog.tasks.merge_duplicates",
+        "function": "merge_duplicates",
+        "groups": ["meta"],
+        "priority": -100
+    },
+    "cleanup": {
+        "nice_name": "Cleaning up entries",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.cleanup",
+        "function": "do_cleanup",
+        "groups": ["meta"],
+        "priority": -10
+    }
+}

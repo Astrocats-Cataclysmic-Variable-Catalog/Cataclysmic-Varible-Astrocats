@@ -1,0 +1,38 @@
+# `AstroCatalogs/astrocats` Source Code README #
+
+## Contents ##
+-   **astrocats/**:
+    -   `__init__.py`
+    -   `__main__.py`
+    -   `main.py`:  *The primary entry point for all catalog operations.*
+    -   **catalog/**: *Templates and basic machinery for all individual catalogs.*
+        -   `catalog.py`: *Overarching container class for all open catalogs.*
+        -   `catdict.py`: *Bottom level data-storage container for properties of each entry in a catalog*
+        -   `entry.py`: *The base class for individual 'entries' in each catalog.*
+        -   `error.py`: *represent and handle (known) errors in catalog source data.*
+        -   `key.py`: *
+        -   `task.py`: *object to represent the underlying list of operations to construct a catalog (see also `tasks.json`)*
+        -   **tasks/**: *tasks to be performed by general import scripts*
+        -   `utils/`: *general purpose utility functions*
+    -   **cataclysmic/**
+        -   `cataclysmic.py`: *subclass of `entry` specific for the cataclysmic catalog*
+        -   `tasks/`: *files associated with operations to build this catalog.*
+        -   `input/`: *data files and repositories contributing data/parameters*
+            -   `biberrors.json`: *Specific bibcodes with errors*
+            -   `non-cv-types.json`: *list of types which are *not* cataclysmic*
+            -   `repos.json`: *list of git repositories in the cataclysmic catalog*
+            -   `tasks.json`: *list of tasks and associated parameters to construct the catalog*
+            -   `cv-internal/`: *Hand-made cataclysmic data files to be loaded and processed*
+            -   `cv-external.../`: *Downloaded/externally retrieved data files to be loaded and processed*
+            -   ...
+        -   `output/`: *data products constructed by the cataclysmic catalog*
+            -   `catalog.json`: *output of all cataclysmic data*
+            -   `cache/`: *intermediate files used during catalog creation*
+                -   `bibauthors.json`
+                -   `extinctions.json`
+        -   `scripts/`: *individual catalog operations scripts()*
+            -   download...
+            -   find...
+            -   make...
+        -   `html/`: *files associated with the cataclysmic catalog webpage*
+            -   ...

@@ -1,0 +1,28 @@
+{
+    "output":[
+        "cv-pre-1990",
+        "cv-1990-1999",
+        "cv-2000-2004",
+        "cv-2005-2009",
+        "cv-2010-2014",
+        "cv-2015-2019"
+    ],
+    "boneyard":[
+        "cv-boneyard"
+    ],
+    "external":[
+        "cv-external",
+        "cv-external-radio",
+        "cv-external-xray",
+        "cv-external-spectra",
+        "cv-external-fits-spectra",
+        "cv-external-models"
+    ],
+    "private":[
+        "sne-private-iair-arcavi",
+        "sne-private-matt-nicholl"
+    ],
+    "internal":[
+        "cv-internal"
+    ]
+}
