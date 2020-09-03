@@ -36,9 +36,10 @@ def do_asassn(catalog):
         tds = tr.findAll('td')
         atex = 0
         for tdi, td in enumerate(tds):
-            if tdi == 0 and td.text.strip() != '---':
+            if tdi == 0 and td.text.strip() != '---' and td.text.strip() != '':
                 try:
-                    name = catalog.add_entry(td.text.strip().replace("?","_"))
+#                    name = catalog.add_entry(td.text.strip().replace("?","_"))
+                    star_name = td.text.strip().replace("?","_")
 #                    atellink = td.find('a')
                     atex = 1
 #                    if atellink:
@@ -49,7 +50,8 @@ def do_asassn(catalog):
                     pass
             if tdi == 1 and td.text.strip() != '---':
                 if atex == 0:
-                    name = catalog.add_entry(td.text.strip().replace("?","_").replace(':','_'))
+#                    name = catalog.add_entry(td.text.strip().replace("?","_").replace(':','_'))
+                    star_name = td.text.strip().replace("?","_").replace(":","_")
 #                    atellink = td.find('a')
 #                    if atellink:
 #                        atellink = atellink['href']
@@ -76,6 +78,7 @@ def do_asassn(catalog):
             if tdi == 11:
                 comment = td.text
         if 'CV' in comment:
+            name = catalog.add_entry(star_name)
             sources = [catalog.entries[name].add_source(
                 url=asn_url, name='ASAS-CV Transients')]
             typesources = sources[:]

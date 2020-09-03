@@ -27,48 +27,54 @@ def do_gaia(catalog):
     for ri, row in enumerate(pbar(tsvin, task_str)):
         if ri == 0 or not row:
             continue
-        name = catalog.add_entry(row[0])
-        source = catalog.entries[name].add_source(name=reference, url=refurl)
-        catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, source)
-        year = '20' + re.findall(r'\d+', row[0])[0]
-        catalog.entries[name].add_quantity(CATACLYSMIC.DISCOVER_DATE, year,
-                                           source)
-        catalog.entries[name].add_quantity(
-            CATACLYSMIC.RA, row[2], source, u_value='floatdegrees')
-        catalog.entries[name].add_quantity(
-            CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
-        if name == 'Gaia16adj':
-            continue
-        if name == 'Gaia20djb':
-            continue
         #TODO: ? for cv's
-        if row[7] and row[7] != 'unknown':
-            type = row[7].replace('CV', '').strip()
+        if row[7] == 'CV':
+            name = catalog.add_entry(row[0])
+            source = catalog.entries[name].add_source(name=reference, url=refurl)
+            catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, source)
+            year = '20' + re.findall(r'\d+', row[0])[0]
+            catalog.entries[name].add_quantity(CATACLYSMIC.DISCOVER_DATE, year,
+                                           source)
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.RA, row[2], source, u_value='floatdegrees')
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
+            type = row[7].strip()
             catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, type,
                                                source)
         elif any([
                 xx in row[9].upper()
-                for xx in ['CV CANDIATE', 'CANDIDATE CV', 'HOSTLESS BLUE TRANSIENT']
+                for xx in ['CV CANDIATE', 'CANDIDATE CV']
         ]):
+            name = catalog.add_entry(row[0])
+            source = catalog.entries[name].add_source(name=reference, url=refurl)
+            catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, source)
+            year = '20' + re.findall(r'\d+', row[0])[0]
+            catalog.entries[name].add_quantity(CATACLYSMIC.DISCOVER_DATE, year,
+                                           source)
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.RA, row[2], source, u_value='floatdegrees')
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
             catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE,
                                                'Candidate', source)
 
-        if ('aka' in row[9].replace('gakaxy', 'galaxy').lower() and
-                'AKARI' not in row[9]):
-            commentsplit = (row[9].replace('_', ' ').replace('MLS ', 'MLS')
-                            .replace('CSS ', 'CSS').replace('CV iPTF', 'iPTF')
-                            .replace('CV ', 'CV').replace('AT ', 'AT'))
-            commentsplit = commentsplit.split()
-            for csi, cs in enumerate(commentsplit):
-                if 'aka' in cs.lower() and csi < len(commentsplit) - 1:
-                    alias = commentsplit[csi + 1].strip('(),:.ï»¿').replace(
-                        'PSNJ', 'PSN J')
-                    if alias[:6] == 'ASASSN' and alias[6] != '-':
-                        alias = 'ASASSN-' + alias[6:]
-                    if alias.lower() != 'master':
-                        catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS,
-                                                           alias, source)
-                    break
+#        if ('aka' in row[9].replace('gakaxy', 'galaxy').lower() and
+#                'AKARI' not in row[9]):
+#            commentsplit = (row[9].replace('_', ' ').replace('MLS ', 'MLS')
+#                            .replace('CSS ', 'CSS').replace('CV iPTF', 'iPTF')
+#                            .replace('CV ', 'CV').replace('AT ', 'AT'))
+#            commentsplit = commentsplit.split()
+#            for csi, cs in enumerate(commentsplit):
+#                if 'aka' in cs.lower() and csi < len(commentsplit) - 1:
+#                    alias = commentsplit[csi + 1].strip('(),:.ï»¿').replace(
+#                        'PSNJ', 'PSN J')
+#                    if alias[:6] == 'ASASSN' and alias[6] != '-':
+#                        alias = 'ASASSN-' + alias[6:]
+#                    if alias.lower() != 'master':
+#                        catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS,
+#                                                           alias, source)
+#                    break
 
 #        fname = os.path.join(catalog.get_current_task_repo(),
 #                             'GAIA/') + row[0] + '.csv'#

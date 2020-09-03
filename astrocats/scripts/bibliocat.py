@@ -49,7 +49,7 @@ else:
 
 aapath = 'astrocats/' + moduledir + '/output/cache/biballauthors.json'
 if os.path.isfile(aapath):
-    with open(aapath, 'r') as f:
+    with open(aapath, 'r', encoding='utf-8') as f:
         biballauthordict = json.load(f, object_pairs_hook=OrderedDict)
         #biballauthordict = requests.get(f).json()
 else:

@@ -8,6 +8,34 @@
         "repo": "input/cv-internal",
         "priority": 1
     },
+    "simbad": {
+        "nice_name": "%pre SIMBAD",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.simbad",
+        "function": "do_simbad",
+        "groups": ["meta"],
+        "priority": 3
+    },
+    "ascii": {
+        "nice_name": "%pre ASCII",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.ascii",
+        "function": "do_ascii",
+        "repo": "input/cv-external",
+        "priority": 8
+    },
+    "gaia": {
+        "nice_name": "%pre GAIA",
+        "active": true,
+        "update": true,
+        "archived": false,
+        "module": "cataclysmic.tasks.gaia",
+        "function": "do_gaia",
+        "repo": "input/cv-external",
+        "priority": 21
+    },
     "crts": {
         "nice_name": "%pre CRTS",
         "active": true,
@@ -18,6 +46,16 @@
         "repo": "input/cv-external",
         "always_journal": true,
         "priority": 28
+    },
+    "asassn": {
+        "nice_name": "%pre ASASSN",
+        "active": true,
+        "update": true,
+        "module": "cataclysmic.tasks.asassn",
+        "function": "do_asassn",
+        "repo": "input/cv-external",
+        "always_journal": true,
+        "priority": 34
     },
     "merge_duplicates": {
         "nice_name": "Merging duplicates",
