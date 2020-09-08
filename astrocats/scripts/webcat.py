@@ -150,7 +150,7 @@ elif args.catalog == 'kne':
 elif args.catalog == 'cv':
     moduledir = 'cataclysmic'
     modulename = 'cv'
-    moduleurl = 'csv.space'
+    moduleurl = 'depts.washington.edu/catvar/'
     moduletitle = 'Cataclysmic'
 else:
     raise ValueError('Unknown catalog!')
