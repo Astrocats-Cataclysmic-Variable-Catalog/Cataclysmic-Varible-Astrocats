@@ -96,3 +96,5 @@ ads.key
 catalog-test-input/
 catalog-test-output/
 catexplorer/
+astrocats/cataclysmic/output/
+.travis.yml
