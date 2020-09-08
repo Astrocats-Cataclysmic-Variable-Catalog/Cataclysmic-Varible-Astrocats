@@ -3,11 +3,7 @@
 
 name: autoupdate
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+on: push
 
 jobs:
   build:
@@ -18,20 +14,20 @@ jobs:
         python-version: [3.5, 3.6, 3.7]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: importing
-      run: |
-        python -m astrocats setup
-        python -m astrocats cataclysmic import
-    - name: generating catalog
-      run: |
-        python -m astrocats.scripts.webcat -c cv
-        python -m astrocats.scripts.bibliocat -c cv
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: importing
+        run: |
+          python -m astrocats setup
+          python -m astrocats cataclysmic import
+      - name: generating catalog
+        run: |
+          python -m astrocats.scripts.webcat -c cv
+          python -m astrocats.scripts.bibliocat -c cv
