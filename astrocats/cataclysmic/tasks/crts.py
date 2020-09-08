@@ -74,7 +74,7 @@ def do_crts(catalog):
 #                                 typelink.split('=')[-1], url=typelink)))
                 sources = ','.join(sources)
                 typesources = ','.join(typesources)
-#                catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, sources)
+                catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, sources)
                 catalog.entries[name].add_quantity(
                     CATACLYSMIC.DISCOVER_DATE, discdate, sources)
                 catalog.entries[name].add_quantity(CATACLYSMIC.RA, ra, sources,
