@@ -29,5 +29,5 @@ jobs:
           python -m astrocats cataclysmic import
       - name: generating catalog
         run: |
-          python -m astrocats.scripts.webcat -c cv --travis
+          python -m astrocats.scripts.webcat -c cv
           python -m astrocats.scripts.bibliocat -c cv
