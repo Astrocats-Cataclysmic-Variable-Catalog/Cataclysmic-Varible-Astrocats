@@ -33,3 +33,11 @@ jobs:
         run: |
           python -m astrocats.scripts.webcat -c cv -v
           python -m astrocats.scripts.bibliocat -c cv
+      - name: copy file via ssh password
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          source: "astrocats/cataclysmic/output/catalog.json"
+          target: "public_html/astrocats/astrocats/supernovae/output"
