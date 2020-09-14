@@ -31,7 +31,7 @@ jobs:
           python -m astrocats cataclysmic import
       - name: generating catalog
         run: |
-          python -m astrocats.scripts.webcat -c cv -v
+          python -m astrocats.scripts.webcat -c cv
           python -m astrocats.scripts.bibliocat -c cv
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
