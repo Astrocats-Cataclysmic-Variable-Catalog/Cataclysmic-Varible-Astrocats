@@ -11,6 +11,7 @@ The Astrocats package enables astronomers to construct their own curated catalog
 * [The Open TDE Catalog](https://tde.space) [[GitHub repo](https://github.com/astrocatalogs/tidaldisruptions)]
 * [The Open Nova Catalog](https://opennova.space) [[GitHub repo](https://github.com/astrocatalogs/novae)]
 * [The Open Black Hole Catalog](https://holes.space) [[GitHub repo](https://github.com/astrocatalogs/blackholes)]
+* [The Open Cataclysmic Variable Catalog](http://depts.washington.edu/catvar/) [[GitHub repo](https://github.com/Astrocats-Cataclysmic-Variable-Catalog/Cataclysmic-Varible-Astrocats)]
 
 The process for creating one's own open astronomy catalog involves checking out this package and designing a "module" for it that is specific to that catalog's needs, a [Wiki is available](https://github.com/astrocatalogs/astrocats/wiki) with instructions for doing so. At the moment the most developed module is the Open Supernova Catalog module; to set up astrocats with the supernovae module, one needs to check out two repositories:
 
