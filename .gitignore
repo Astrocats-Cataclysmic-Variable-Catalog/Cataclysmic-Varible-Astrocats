@@ -23,7 +23,6 @@ MANIFEST
 *.jpg
 *.gz
 *.csv
-*.html
 *.json
 *.sw*
 *.profile

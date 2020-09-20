@@ -295,7 +295,6 @@ def is_valid_link(url):
         return False
     return True
 
-
 def get_first_value(name, field):
     return catalog[name][field][0]['value'] if field in catalog[
         name] and catalog[name][field] else ''
@@ -312,7 +311,6 @@ def md5file(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
-
 
 catalog = OrderedDict()
 catalogcopy = OrderedDict()
