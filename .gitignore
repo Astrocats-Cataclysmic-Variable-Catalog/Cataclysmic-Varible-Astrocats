@@ -92,7 +92,12 @@ blackholes
 novae
 kilonovae
 ads.key
+cv-2005-2009/
+cv-2010-2014/
+cv-2015-2019/
+cv-pre-1990/
 catalog-test-input/
 catalog-test-output/
 catexplorer/
 .travis.yml
+*.test
