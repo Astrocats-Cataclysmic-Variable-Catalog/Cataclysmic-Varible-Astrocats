@@ -40,5 +40,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          source: "astrocats/cataclysmic/output/catalog.json"
+          source: "astrocats/cataclysmic/output/catalog.json,astrocats/cataclysmic/output/catalog.min.json,
+          astrocats/cataclysmic/output/biblio.json"
           target: "public_html"
