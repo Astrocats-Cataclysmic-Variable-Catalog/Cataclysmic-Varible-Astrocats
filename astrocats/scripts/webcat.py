@@ -2151,19 +2151,19 @@ for fcnt, eventfile in enumerate(tq(sorted(files, key=lambda s: s.lower()))):
         hover = HoverTool(tooltips=tt, renderers=ttglyphs)
         p4.add_tools(hover)
 
-    hasimage = False
-    skyhtml = ''
-    if 'ra' in catalog[entry] and 'dec' in catalog[
-            entry] and args.collecthosts:
-        snra = catalog[entry]['ra'][0]['value']
-        sndec = catalog[entry]['dec'][0]['value']
-        try:
-            c = coord(ra=snra, dec=sndec, unit=(un.hourangle, un.deg))
-        except (KeyboardInterrupt, SystemExit):
-            raise
-        except Exception:
-            warnings.warn('Malformed angle for event ' + entry + '.')
-        else:
+#    hasimage = False
+#    skyhtml = ''
+#    if 'ra' in catalog[entry] and 'dec' in catalog[
+#            entry] and args.collecthosts:
+#        snra = catalog[entry]['ra'][0]['value']
+#        sndec = catalog[entry]['dec'][0]['value']
+#        try:
+#            c = coord(ra=snra, dec=sndec, unit=(un.hourangle, un.deg))
+#        except (KeyboardInterrupt, SystemExit):
+#            raise
+#        except Exception:
+#            warnings.warn('Malformed angle for event ' + entry + '.')
+#        else:
             # if 'lumdist' in catalog[entry] and float(catalog[entry]['lumdist'][0]['value']) > 0.:
             #    if 'host' in catalog[entry] and catalog[entry]['host'][0]['value'] == 'Milky Way':
             #        sdssimagescale = max(0.05,0.4125/float(catalog[entry]['lumdist'][0]['value']))
@@ -2178,104 +2178,104 @@ for fcnt, eventfile in enumerate(tq(sorted(files, key=lambda s: s.lower()))):
             # At the moment, no way to check if host is in SDSS footprint
             # without comparing to empty image, which is only possible at fixed
             # angular resolution.
-            sdssimagescale = 0.3
-            dssimagescale = 0.13889 * sdssimagescale
+#            sdssimagescale = 0.3
+#            dssimagescale = 0.13889 * sdssimagescale
 
-            imgsrc = ''
-            hasimage = True
-            if eventname in hostimgdict:
-                imgsrc = hostimgdict[eventname]
-            elif args.collecthosts:
-                try:
-                    response = urllib.request.urlopen(
-                        'http://skyserver.sdss.org/dr13/SkyServerWS/ImgCutout/getjpeg?ra='
-                        + str(c.ra.deg) + '&dec=' + str(c.dec.deg) + '&scale='
-                        + str(sdssimagescale) + '&width=500&height=500&opt=G',
-                        timeout=60)
-                    resptxt = response.read()
-                except (KeyboardInterrupt, SystemExit):
-                    raise
-                except Exception:
-                    hasimage = False
-                else:
-                    with open(outdir + htmldir + fileeventname + '-host.jpg',
-                              'wb') as f:
-                        f.write(resptxt)
-                    imgsrc = 'SDSS'
-
-                if hasimage and filecmp.cmp(
-                        outdir + htmldir + fileeventname + '-host.jpg',
-                        'astrocats/' + moduledir + '/input/missing.jpg'):
-                    hasimage = False
-
-                if not hasimage:
-                    hasimage = True
-                    url = (
-                        "http://skyview.gsfc.nasa.gov/current/cgi/runquery.pl?Position="
-                        + str(urllib.parse.quote_plus(snra + " " + sndec)) +
-                        "&coordinates=J2000&coordinates=&projection=Tan&pixels=500&size="
-                        + str(dssimagescale) +
-                        "&float=on&scaling=Log&resolver=SIMBAD-NED" +
-                        "&Sampler=_skip_&Deedger=_skip_&rotation=&Smooth=&lut=colortables%2Fb-w-linear.bin&PlotColor=&grid=_skip_&gridlabels=1"
-                        +
-                        "&catalogurl=&CatalogIDs=on&RGB=1&survey=DSS2+IR&survey=DSS2+Red&survey=DSS2+Blue&IOSmooth=&contour=&contourSmooth=&ebins=null"
-                    )
-
-                    try:
-                        response = urllib.request.urlopen(url, timeout=60)
-                        bandsoup = BeautifulSoup(response, "html5lib")
-                    except (KeyboardInterrupt, SystemExit):
-                        raise
-                    except Exception:
-                        hasimage = False
-                    else:
-                        images = bandsoup.findAll('img')
-                        imgname = ''
-                        for image in images:
-                            if "Quicklook RGB image" in image.get('alt', ''):
-                                imgname = image.get('src', '').split('/')[-1]
-
-                        if imgname:
-                            try:
-                                response = urllib.request.urlopen(
-                                    'http://skyview.gsfc.nasa.gov/tempspace/fits/'
-                                    + imgname)
-                                with open(outdir + htmldir + fileeventname +
-                                          '-host.jpg', 'wb') as f:
-                                    f.write(response.read())
-                                imgsrc = 'DSS'
-                            except (KeyboardInterrupt, SystemExit):
-                                raise
-                            except Exception:
-                                hasimage = False
-                        else:
-                            hasimage = False
-
-        if hasimage:
-            if imgsrc == 'SDSS':
-                hostimgdict[eventname] = 'SDSS'
-                skyhtml = (
-                    '<a href="http://skyserver.sdss.org/DR13/en/tools/chart/navi.aspx?opt=G&ra='
-                    + str(c.ra.deg) + '&dec=' + str(c.dec.deg) +
-                    '&scale=0.15"><img src="' + urllib.parse.quote(
-                        fileeventname) + '-host.jpg" width=250></a>')
-            elif imgsrc == 'DSS':
-                hostimgdict[eventname] = 'DSS'
-                url = (
-                    "http://skyview.gsfc.nasa.gov/current/cgi/runquery.pl?Position="
-                    + str(urllib.parse.quote_plus(snra + " " + sndec)) +
-                    "&coordinates=J2000&coordinates=&projection=Tan&pixels=500&size="
-                    + str(dssimagescale) +
-                    "float=on&scaling=Log&resolver=SIMBAD-NED" +
-                    "&Sampler=_skip_&Deedger=_skip_&rotation=&Smooth=&lut=colortables%2Fb-w-linear.bin&PlotColor=&grid=_skip_&gridlabels=1"
-                    +
-                    "&catalogurl=&CatalogIDs=on&RGB=1&survey=DSS2+IR&survey=DSS2+Red&survey=DSS2+Blue&IOSmooth=&contour=&contourSmooth=&ebins=null"
-                )
-                skyhtml = ('<a href="' + url + '"><img src="' +
-                           urllib.parse.quote(fileeventname) +
-                           '-host.jpg" width=250></a>')
-        else:
-            hostimgdict[eventname] = 'None'
+ #           imgsrc = ''
+ #           hasimage = True
+ #           if eventname in hostimgdict:
+ #               imgsrc = hostimgdict[eventname]
+ #           elif args.collecthosts:
+ #               try:
+#                    response = urllib.request.urlopen(
+#                        'http://skyserver.sdss.org/dr13/SkyServerWS/ImgCutout/getjpeg?ra='
+#                        + str(c.ra.deg) + '&dec=' + str(c.dec.deg) + '&scale='
+#                        + str(sdssimagescale) + '&width=500&height=500&opt=G',
+#                        timeout=60)
+#                    resptxt = response.read()
+#                except (KeyboardInterrupt, SystemExit):
+#                    raise
+#                except Exception:
+#                    hasimage = False
+#                else:
+#                    with open(outdir + htmldir + fileeventname + '-host.jpg',
+#                              'wb') as f:
+#                        f.write(resptxt)
+#                    imgsrc = 'SDSS'
+#
+#                if hasimage and filecmp.cmp(
+#                        outdir + htmldir + fileeventname + '-host.jpg',
+#                        'astrocats/' + moduledir + '/input/missing.jpg'):
+#                    hasimage = False
+#
+#                if not hasimage:
+#                    hasimage = True
+#                    url = (
+#                        "http://skyview.gsfc.nasa.gov/current/cgi/runquery.pl?Position="
+#                        + str(urllib.parse.quote_plus(snra + " " + sndec)) +
+#                        "&coordinates=J2000&coordinates=&projection=Tan&pixels=500&size="
+#                        + str(dssimagescale) +
+#                        "&float=on&scaling=Log&resolver=SIMBAD-NED" +
+#                        "&Sampler=_skip_&Deedger=_skip_&rotation=&Smooth=&lut=colortables%2Fb-w-linear.bin&PlotColor=&grid=_skip_&gridlabels=1"
+#                        +
+#                        "&catalogurl=&CatalogIDs=on&RGB=1&survey=DSS2+IR&survey=DSS2+Red&survey=DSS2+Blue&IOSmooth=&contour=&contourSmooth=&ebins=null"
+#                    )
+#
+#                    try:
+#                        response = urllib.request.urlopen(url, timeout=60)
+#                        bandsoup = BeautifulSoup(response, "html5lib")
+#                    except (KeyboardInterrupt, SystemExit):
+#                        raise
+#                    except Exception:
+#                        hasimage = False
+#                    else:
+#                        images = bandsoup.findAll('img')
+#                        imgname = ''
+#                        for image in images:
+#                            if "Quicklook RGB image" in image.get('alt', ''):
+#                                imgname = image.get('src', '').split('/')[-1]
+#
+#                        if imgname:
+#                            try:
+#                                response = urllib.request.urlopen(
+#                                    'http://skyview.gsfc.nasa.gov/tempspace/fits/'
+#                                    + imgname)
+#                                with open(outdir + htmldir + fileeventname +
+#                                          '-host.jpg', 'wb') as f:
+#                                    f.write(response.read())
+#                                imgsrc = 'DSS'
+#                            except (KeyboardInterrupt, SystemExit):
+#                                raise
+#                            except Exception:
+#                                hasimage = False
+#                        else:
+#                            hasimage = False
+#
+#        if hasimage:
+#            if imgsrc == 'SDSS':
+#                hostimgdict[eventname] = 'SDSS'
+#                skyhtml = (
+#                    '<a href="http://skyserver.sdss.org/DR13/en/tools/chart/navi.aspx?opt=G&ra='
+#                    + str(c.ra.deg) + '&dec=' + str(c.dec.deg) +
+#                    '&scale=0.15"><img src="' + urllib.parse.quote(
+#                        fileeventname) + '-host.jpg" width=250></a>')
+#            elif imgsrc == 'DSS':
+#                hostimgdict[eventname] = 'DSS'
+#                url = (
+#                    "http://skyview.gsfc.nasa.gov/current/cgi/runquery.pl?Position="
+#                    + str(urllib.parse.quote_plus(snra + " " + sndec)) +
+#                    "&coordinates=J2000&coordinates=&projection=Tan&pixels=500&size="
+#                    + str(dssimagescale) +
+#                    "float=on&scaling=Log&resolver=SIMBAD-NED" +
+#                    "&Sampler=_skip_&Deedger=_skip_&rotation=&Smooth=&lut=colortables%2Fb-w-linear.bin&PlotColor=&grid=_skip_&gridlabels=1"
+#                    +
+#                    "&catalogurl=&CatalogIDs=on&RGB=1&survey=DSS2+IR&survey=DSS2+Red&survey=DSS2+Blue&IOSmooth=&contour=&contourSmooth=&ebins=null"
+#                )
+#                skyhtml = ('<a href="' + url + '"><img src="' +
+#                           urllib.parse.quote(fileeventname) +
+#                           '-host.jpg" width=250></a>')
+ #       else:
+ #           hostimgdict[eventname] = 'None'
 
     if dohtml and args.writehtml:
         # if (photoavail and spectraavail) and dohtml and args.writehtml:
@@ -2622,11 +2622,11 @@ if args.writecatalog and not args.eventlist:
         f.write(jsonstring)
 
     # Write the host image info
-    if args.collecthosts:
-        jsonstring = json.dumps(
-            hostimgdict, indent='\t', separators=(',', ':'))
-        with open(outdir + cachedir + 'hostimgs.json' + testsuffix, 'w') as f:
-            f.write(jsonstring)
+#    if args.collecthosts:
+#        jsonstring = json.dumps(
+#            hostimgdict, indent='\t', separators=(',', ':'))
+#        with open(outdir + cachedir + 'hostimgs.json' + testsuffix, 'w') as f:
+#            f.write(jsonstring)
 
     if not args.boneyard:
         # Things David wants in this file: names (aliases), max mag, max mag
