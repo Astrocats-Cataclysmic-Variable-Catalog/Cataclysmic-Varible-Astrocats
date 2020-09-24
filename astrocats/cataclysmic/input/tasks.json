@@ -26,6 +26,15 @@
         "repo": "input/cv-external",
         "priority": 8
     },
+    "ztf": {
+        "nice_name": "%pre ztf",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.ztf",
+        "function": "do_ztf",
+        "repo": "input/cv-external",
+        "priority": 9
+    },
     "gaia": {
         "nice_name": "%pre GAIA",
         "active": true,
