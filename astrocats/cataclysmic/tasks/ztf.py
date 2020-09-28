@@ -47,7 +47,7 @@ def do_ztf(catalog):
     #        if nonsne:
     #            continue
             name, source = catalog.new_entry(
-                row['name'],
+                'ZTF'+row['name'],
                 srcname='ZTF',
                 bibcode='2020AJ....159..198S')
     #        if row['IAU des.'] != '--':
