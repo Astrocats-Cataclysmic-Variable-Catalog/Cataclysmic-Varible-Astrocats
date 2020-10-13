@@ -99,11 +99,12 @@ def do_simbad(catalog):
                                  row['SP_BIBCODE_2'] else []))
             catalog.entries[name].add_quantity(
                 CATACLYSMIC.CLAIMED_TYPE,
-                (row['SP_TYPE']
+                (row['OTYPE']
                  .replace('CV.', 'CV')
                  .replace('CV', 'CV')
                  .replace('(~)', '')
 				 .replace('CV?', 'Candidate')
+                 .replace('*', '_')
                  .strip(': ')), ssources)
     catalog.journal_entries()
     return
