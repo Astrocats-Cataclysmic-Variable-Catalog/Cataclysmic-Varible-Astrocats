@@ -82,7 +82,7 @@ def do_crts(catalog):
                 catalog.entries[name].add_quantity(CATACLYSMIC.DEC, dec, sources,
                                                u_value='floatdegrees')
                 catalog.entries[name].add_quantity(
-                    CATACLYSMIC.VISUAL_MAG, mag, sources)
+                      CATACLYSMIC.MAX_VISUAL_APP_MAG, mag, sources)
 #            for ct in claimedtype.split('/'):
 #                if ct != 'Unk':
 #                    catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, ct,

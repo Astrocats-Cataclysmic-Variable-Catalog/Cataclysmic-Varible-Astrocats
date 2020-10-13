@@ -39,9 +39,11 @@ def do_gaia(catalog):
                 CATACLYSMIC.RA, row[2], source, u_value='floatdegrees')
             catalog.entries[name].add_quantity(
                 CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
-            type = row[7].strip()
-            catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, type,
+            catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'known CV',
                                                source)
+            if int(float(row[4])) >= 8:
+                catalog.entries[name].add_quantity(
+                            CATACLYSMIC.MAX_VISUAL_APP_MAG, row[4], source)
         elif any([
                 xx in row[9].upper()
                 for xx in ['CV CANDIATE', 'CANDIDATE CV']
@@ -58,6 +60,9 @@ def do_gaia(catalog):
                 CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
             catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE,
                                                'Candidate', source)
+            if int(float(row[4])) >= 8:
+                catalog.entries[name].add_quantity(
+                            CATACLYSMIC.MAX_VISUAL_APP_MAG, row[4], source)
 
 #        if ('aka' in row[9].replace('gakaxy', 'galaxy').lower() and
 #                'AKARI' not in row[9]):

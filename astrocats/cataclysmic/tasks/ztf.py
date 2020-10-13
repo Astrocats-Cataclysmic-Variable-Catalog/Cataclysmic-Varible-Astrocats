@@ -66,6 +66,8 @@ def do_ztf(catalog):
     #                                           source)
             catalog.entries[name].add_quantity(CATACLYSMIC.RA, row['ra'], source)
             catalog.entries[name].add_quantity(CATACLYSMIC.DEC, row['dec'], source)
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.MAX_VISUAL_APP_MAG, row['mag'], source)
     catalog.journal_entries()
 
     # Howerton Catalog

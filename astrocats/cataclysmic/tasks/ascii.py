@@ -61,7 +61,7 @@ def do_ascii(catalog):
 #        date = '/'.join([date[-1].zfill(2), date[0].zfill(2), date[1]])
 #        catalog.entries[name].add_quantity(SUPERNOVA.DISCOVER_DATE, date,
 #                                           source)
-        catalog.entries[name].add_quantity(CATACLYSMIC.VISUAL_MAG, row['Vmax'],
+        catalog.entries[name].add_quantity(CATACLYSMIC.MAX_VISUAL_APP_MAG, row['Vmin'],
                                            source)
         catalog.entries[name].add_quantity(CATACLYSMIC.RA, row['RAJ2000'], source)
         catalog.entries[name].add_quantity(CATACLYSMIC.DEC, row['DEJ2000'], source)

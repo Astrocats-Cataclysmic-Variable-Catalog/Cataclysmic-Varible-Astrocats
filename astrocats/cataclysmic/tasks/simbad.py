@@ -100,9 +100,10 @@ def do_simbad(catalog):
             catalog.entries[name].add_quantity(
                 CATACLYSMIC.CLAIMED_TYPE,
                 (row['SP_TYPE']
-                 .replace('CV.', '')
-                 .replace('CV', '')
+                 .replace('CV.', 'CV')
+                 .replace('CV', 'CV')
                  .replace('(~)', '')
+				 .replace('CV?', 'Candidate')
                  .strip(': ')), ssources)
     catalog.journal_entries()
     return

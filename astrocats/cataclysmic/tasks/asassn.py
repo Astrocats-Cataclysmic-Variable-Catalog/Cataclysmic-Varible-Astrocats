@@ -68,7 +68,11 @@ def do_asassn(catalog):
                 if discdate == 'bc094//0':
                     discdate = '' #ASASSN-15co was having bc094--0 as a date
             if tdi == 6:
-                mag = td.text
+                mag_place = td.text
+                if td.text == '' or mag_place[-1:] == ')':
+                    mag = td.text
+                elif int(float(td.text)) >= 8:
+                    mag = td.text
             if tdi == 7:
                 sdsslink = td.find('a')
                 if sdsslink:
@@ -102,7 +106,13 @@ def do_asassn(catalog):
             catalog.entries[name].add_quantity(CATACLYSMIC.DEC, dec, sources,
                                                u_value='floatdegrees')
             catalog.entries[name].add_quantity(
-                CATACLYSMIC.VISUAL_MAG, mag, sources)
+                CATACLYSMIC.MAX_VISUAL_APP_MAG, mag, sources)
+            if 'known CV' in comment and not 'known CV candidate' in comment:
+                catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'known CV',
+                                        sources)
+            if 'CV candidate' in comment:
+                catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'Candidate',
+                                        sources)
 #            for ct in claimedtype.split('/'):
 #                if ct != 'Unk':
 #                    catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, ct,

@@ -29,7 +29,7 @@ class CATACLYSMIC(ENTRY):
     DISCOVERY_DATE = Key('discoverdate', KEY_TYPES.STRING)
     EXPLOSION_DATE = Key('explosiondate', KEY_TYPES.STRING)
     MAX_VISUAL_ABS_MAG = Key('maxvisualabsmag', KEY_TYPES.NUMERIC)
-    MAX_VISUAL_APP_MAG = Key('maxvisualappmag', KEY_TYPES.NUMERIC)
+    MAX_VISUAL_APP_MAG = Key('maxappmag', KEY_TYPES.NUMERIC)
     MAX_VISUAL_BAND = Key('maxvisualband', KEY_TYPES.STRING)
     MAX_VISUAL_DATE = Key('maxvisualdate',
                           KEY_TYPES.STRING,
