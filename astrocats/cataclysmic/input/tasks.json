@@ -66,6 +66,17 @@
         "always_journal": true,
         "priority": 34
     },
+    "master_ot": {
+        "nice_name": "%pre MASTER-OT",
+        "active": true,
+        "update": true,
+        "archived": true,
+        "module": "cataclysmic.tasks.masterot",
+        "function": "do_masterot",
+        "repo": "input/cv-external",
+        "always_journal": true,
+        "priority": 36
+    },
     "merge_duplicates": {
         "nice_name": "Merging duplicates",
         "active": false,
