@@ -12,7 +12,6 @@ from bs4 import BeautifulSoup
 
 from astrocats.cataclysmic.cataclysmic import CATACLYSMIC
 
-#DO NOT RUN! This code is currently not functional.#
 def do_masterot(catalog):
     """Import list of MASTER events."""
     task_str = catalog.get_current_task_str()
@@ -22,7 +21,7 @@ def do_masterot(catalog):
     if not html:
         return
     bs = BeautifulSoup(html, 'html5lib')
-#RA and DEC is buged because the source does not have proper constructions for RA and DEC. Need to talk to professor about this
+#Issue, Only first ~1100 entries being read in. 
     table = bs.findAll("a", attrs={'href': re.compile(
            "^http://(master.sai.msu.ru|www.astronomerstelegram.org|gcn.gsfc.nasa.gov|observ.pereplet.ru|)")}) ####
     reduced_table = [(a.string, a.next_sibling) for a in table]

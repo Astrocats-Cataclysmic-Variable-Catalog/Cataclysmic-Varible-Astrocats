@@ -70,7 +70,7 @@
         "nice_name": "%pre MASTER-OT",
         "active": true,
         "update": true,
-        "archived": true,
+        "archived": false,
         "module": "cataclysmic.tasks.masterot",
         "function": "do_masterot",
         "repo": "input/cv-external",
