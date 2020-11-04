@@ -27,7 +27,6 @@ def do_gaia(catalog):
     for ri, row in enumerate(pbar(tsvin, task_str)):
         if ri == 0 or not row:
             continue
-        #TODO: ? for cv's
         if row[7] == 'CV':
             name = catalog.add_entry(row[0])
             source = catalog.entries[name].add_source(name=reference, url=refurl)

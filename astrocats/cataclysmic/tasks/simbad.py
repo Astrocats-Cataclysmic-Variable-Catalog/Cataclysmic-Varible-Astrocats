@@ -21,7 +21,8 @@ def do_simbad(catalog):
                         '2015ApJ...807L..18N']
     simbadbadnamebib = ['2004AJ....127.2809W', '2005MNRAS.364.1419Z',
                         '2015A&A...574A.112D', '2011MNRAS.417..916G',
-                        '2002ApJ...566..880G','url:TNS']
+                        '2002ApJ...566..880G','url:TNS','url:CBAT',
+                        'url:GPSA','url:ASASSN']
     simbadbannedcats = ['[TBV2008]', 'OGLE-MBR']
     simbadbannednames = ['SN']
     customSimbad = Simbad()
@@ -33,7 +34,7 @@ def do_simbad(catalog):
     for mirror in simbadmirrors:
         customSimbad.SIMBAD_URL = mirror
         try:
-            table = customSimbad.query_criteria('maintype=CV* | maintype="CV?"')
+            table = customSimbad.query_criteria('maintypes=CV* | maintypes="CV?"')
         except Exception:
             continue
         else:
@@ -50,8 +51,9 @@ def do_simbad(catalog):
                          str(brow[x])) for x in brow.colnames}
         # Skip items with no bibliographic info aside from SIMBAD, too
         # error-prone
-        if row['OTYPE'] == 'Candidate_CV*' and not row['SP_TYPE']:
-            continue
+#        print(row)
+#        if row['OTYPE'] == 'Candidate_CV*' and not row['SP_TYPE']:
+#            continue
         if (not row['COO_BIBCODE'] and not row['SP_BIBCODE'] and
                 not row['SP_BIBCODE_2']):
             continue
