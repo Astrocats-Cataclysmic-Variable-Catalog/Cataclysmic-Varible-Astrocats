@@ -20,7 +20,6 @@ from astrocats.cataclysmic.cataclysmic import CATACLYSMIC
 def do_cleanup(catalog):
     """Cleanup catalog after importing all data."""
     task_str = catalog.get_current_task_str()
-
     # Set preferred names, calculate some columns based on imported data,
     # sanitize some fields
     keys = list(catalog.entries.keys())

@@ -39,7 +39,7 @@ class Catalog(object):
 
     """
 
-    OSC_BIBCODE = '2017ApJ...835...64G'
+    OSC_BIBCODE = ''
     OSC_NAME = 'The Open Cataclysmic Variable Catalog'
     OSC_URL = 'http://depts.washington.edu/catvar/'
 
