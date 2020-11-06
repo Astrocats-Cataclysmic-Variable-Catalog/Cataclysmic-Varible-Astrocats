@@ -77,6 +77,16 @@
         "always_journal": true,
         "priority": 36
     },
+    "tns": {
+        "nice_name": "%pre TNS metadata",
+        "active": true,
+        "update": true,
+        "archived": false,
+        "module": "cataclysmic.tasks.tns",
+        "function": "do_tns",
+        "repo": "input/cv-external",
+        "priority": 17
+    },
     "merge_duplicates": {
         "nice_name": "Merging duplicates",
         "active": false,
