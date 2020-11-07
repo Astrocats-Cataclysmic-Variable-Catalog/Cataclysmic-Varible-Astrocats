@@ -45,7 +45,7 @@ def do_tns(catalog):
                   '&display%5Bbibcode%5D=0&display%5Bext_catalogs%5D=0&format=csv')
     csvtxt = catalog.load_url(search_url,
                               os.path.join(catalog.get_current_task_repo(),
-                                           'TNS', 'index.csv'))
+                                           'TNS', 'index.csv'),timeout=220)
     data = read(csvtxt, format='csv')
     for rrow in pbar(data, task_str):
         row = dict((x, str(rrow[x])) for x in rrow.columns)
