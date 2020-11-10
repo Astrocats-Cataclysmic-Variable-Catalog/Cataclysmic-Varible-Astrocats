@@ -65,7 +65,7 @@ def do_asassn(catalog):
                 dec = td.text
             if tdi == 5:
                 discdate = td.text.replace('-', '/')
-                if not discdate.startswith('2'):
+                if not discdate.startswith('2') or discdate.startswith('1'):
                     discdate = ''
 #                if discdate == 'bc094//0':
 #                    discdate = '' #ASASSN-15co was having bc094--0 as a date
