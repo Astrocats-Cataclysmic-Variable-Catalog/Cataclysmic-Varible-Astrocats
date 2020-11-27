@@ -62,7 +62,22 @@ def do_gaia(catalog):
             if int(float(row[4])) >= 8:
                 catalog.entries[name].add_quantity(
                             CATACLYSMIC.MAX_VISUAL_APP_MAG, row[4], source)
-
+        if row[7] == 'Nova':
+            name = catalog.add_entry(row[0])
+            source = catalog.entries[name].add_source(name=reference, url=refurl)
+            catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, source)
+            year = '20' + re.findall(r'\d+', row[0])[0]
+            catalog.entries[name].add_quantity(CATACLYSMIC.DISCOVER_DATE, year,
+                                           source)
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.RA, row[2], source, u_value='floatdegrees')
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.DEC, row[3], source, u_value='floatdegrees')
+            catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'Nova',
+                                               source)
+            if int(float(row[4])) >= 8:
+                catalog.entries[name].add_quantity(
+                            CATACLYSMIC.MAX_VISUAL_APP_MAG, row[4], source)
 #        if ('aka' in row[9].replace('gakaxy', 'galaxy').lower() and
 #                'AKARI' not in row[9]):
 #            commentsplit = (row[9].replace('_', ' ').replace('MLS ', 'MLS')

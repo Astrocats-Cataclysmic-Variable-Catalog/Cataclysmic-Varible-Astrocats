@@ -86,7 +86,7 @@ def do_asassn(catalog):
         if 'CV' in comment:
             name = catalog.add_entry(star_name)
             sources = [catalog.entries[name].add_source(
-                url=asn_url, name='ASAS-CV Transients')]
+                name='ASAS-CV Transients', bibcode="2014ApJ...788...48S",url=asn_url)]
             typesources = sources[:]
             if atellink:
                 sources.append(
@@ -114,6 +114,34 @@ def do_asassn(catalog):
                                         sources)
             if 'CV candidate' in comment:
                 catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'Candidate',
+                                        sources)
+        if 'possible Nova' in comment or 'Possible Nova' in comment or 'Nova candidate' in comment or 'nova candidate' in comment and not 'CV' in comment:
+            name = catalog.add_entry(star_name)
+            sources = [catalog.entries[name].add_source(
+                url=asn_url, name='ASAS-CV Transients')]
+            typesources = sources[:]
+            if atellink:
+                sources.append(
+                    (catalog.entries[name]
+                     .add_source(name='ATel ' +
+                                 atellink.split('=')[-1], url=atellink)))
+#            if typelink:
+#                typesources.append(
+#                    (catalog.entries[name]
+#                     .add_source(name='ATel ' +
+#                                 typelink.split('=')[-1], url=typelink)))
+            sources = ','.join(sources)
+            typesources = ','.join(typesources)
+            catalog.entries[name].add_quantity(CATACLYSMIC.ALIAS, name, sources)
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.DISCOVER_DATE, discdate, sources)
+            catalog.entries[name].add_quantity(CATACLYSMIC.RA, ra, sources,
+                                               u_value='floatdegrees')
+            catalog.entries[name].add_quantity(CATACLYSMIC.DEC, dec, sources,
+                                               u_value='floatdegrees')
+            catalog.entries[name].add_quantity(
+                CATACLYSMIC.MAX_VISUAL_APP_MAG, mag, sources)
+            catalog.entries[name].add_quantity(CATACLYSMIC.CLAIMED_TYPE, 'Candidate Nova',
                                         sources)
 #            for ct in claimedtype.split('/'):
 #                if ct != 'Unk':

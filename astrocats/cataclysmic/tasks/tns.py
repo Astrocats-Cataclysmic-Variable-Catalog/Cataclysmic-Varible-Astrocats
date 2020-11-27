@@ -50,7 +50,7 @@ def do_tns(catalog):
     for rrow in pbar(data, task_str):
         row = dict((x, str(rrow[x])) for x in rrow.columns)
         name = catalog.add_entry(row['Name'])
-        source = catalog.entries[name].add_source(name='TNS', url=tns_url)
+        source = catalog.entries[name].add_source(name='Transient Name Server', url=tns_url)
         if int(float(row['Discovery Mag/Flux'])) >= 8:
             catalog.entries[name].add_quantity(CATACLYSMIC.MAX_VISUAL_APP_MAG, row['Discovery Mag/Flux'],
                                                source)
