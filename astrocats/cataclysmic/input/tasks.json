@@ -17,6 +17,15 @@
         "groups": ["meta"],
         "priority": 3
     },
+    "murawski": {
+        "nice_name": "%pre murawski",
+        "active": true,
+        "update": false,
+        "module": "cataclysmic.tasks.murawski",
+        "function": "do_murawski",
+        "repo": "input/cv-external",
+        "priority": 7
+    },
     "ascii": {
         "nice_name": "%pre ASCII",
         "active": true,
@@ -65,6 +74,16 @@
         "repo": "input/cv-external",
         "always_journal": true,
         "priority": 34
+    },
+    "lasair": {
+        "nice_name": "%pre LASAIR",
+        "active": true,
+        "update": true,
+        "module": "cataclysmic.tasks.lasair",
+        "function": "do_lasair",
+        "repo": "input/cv-external",
+        "always_journal": false,
+        "priority": 35
     },
     "master_ot": {
         "nice_name": "%pre MASTER-OT",
