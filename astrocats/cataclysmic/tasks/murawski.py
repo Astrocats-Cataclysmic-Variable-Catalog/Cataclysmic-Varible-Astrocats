@@ -46,7 +46,7 @@ def do_murawski(catalog):
 #        if nonsne:
 #            continue
         name, source = catalog.new_entry(
-            row['ZTF_name'],
+            row['ZTF_NAME'],
             srcname='Murawski',
             url='http://scan.sai.msu.ru/~denis/MGAB-ZTF.html')
 #        if row['IAU des.'] != '--':
