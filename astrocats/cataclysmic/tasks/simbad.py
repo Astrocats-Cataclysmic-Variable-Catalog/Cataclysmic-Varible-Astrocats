@@ -83,6 +83,13 @@ def do_simbad(catalog):
                   .add_source(name='ASAS-CV Transients',
                               bibcode="2014ApJ...788...48S",
                               url='http://www.astronomy.ohio-state.edu/~assassin/transients.html')])
+        if row['COO_BIBCODE'] == 'url:Lasair':
+            source = ','.join(
+                [source, catalog.entries[name]
+                  .add_source(name='lASAIR Transients and Variables',
+                              bibcode="2019RNAAS...3...26S",
+                              url='https://lasair.roe.ac.uk/')])
+
         aliases = row['ID'].split(',')
         for alias in aliases:
             if any([x in alias for x in simbadbannedcats]):
