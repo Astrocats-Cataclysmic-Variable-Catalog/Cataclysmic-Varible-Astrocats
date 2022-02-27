@@ -23,7 +23,7 @@ def do_simbad(catalog):
                         '2015A&A...574A.112D', '2011MNRAS.417..916G',
                         '2002ApJ...566..880G','url:CBAT',
                         'url:GPSA',]
-    badurlbibname = ['url:TNS','url:ASASSN','url:Lasair']
+    badurlbibname = ['url:TNS','url:ASASSN','url:Lasair','url:AAVSO']
     simbadbannedcats = ['[TBV2008]', 'OGLE-MBR']
     simbadbannednames = ['SN']
     customSimbad = Simbad()
