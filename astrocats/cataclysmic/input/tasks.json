@@ -75,16 +75,6 @@
         "always_journal": true,
         "priority": 34
     },
-    "lasair": {
-        "nice_name": "%pre LASAIR",
-        "active": true,
-        "update": true,
-        "module": "cataclysmic.tasks.lasair",
-        "function": "do_lasair",
-        "repo": "input/cv-external",
-        "always_journal": false,
-        "priority": 35
-    },
     "master_ot": {
         "nice_name": "%pre MASTER-OT",
         "active": true,
