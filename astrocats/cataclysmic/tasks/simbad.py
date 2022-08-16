@@ -16,7 +16,7 @@ def do_simbad(catalog):
     task_str = catalog.get_current_task_str()
     simbadmirrors = ['http://simbad.harvard.edu/simbad/sim-script',
                      'http://simbad.u-strasbg.fr/simbad/sim-script']
-    simbadbadcoordbib = ['2013ApJ...770..107C',]
+    simbadbadcoordbib = ['2013ApJ...770..107C','url:vsnet',]
     simbadbadtypebib = ['2014ApJ...796...87I', '2015MNRAS.448.1206M',
                         '2015ApJ...807L..18N']
     simbadbadnamebib = ['2004AJ....127.2809W', '2005MNRAS.364.1419Z',
