@@ -115,7 +115,6 @@ def do_simbad(catalog):
         if row['COO_BIBCODE'] and row['COO_BIBCODE'] not in simbadbadcoordbib:
             csources = source
             if row['COO_BIBCODE'] not in badurlbibname and row['COO_BIBCODE'] != 'url:vsnet':
-			print(row['COO_BIBCODE'])
 			csources = ','.join(
                     [source, catalog.entries[name].add_source(
                        bibcode=row['COO_BIBCODE'])])
