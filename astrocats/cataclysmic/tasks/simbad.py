@@ -114,8 +114,8 @@ def do_simbad(catalog):
                  .strip(': ')), source)
         if row['COO_BIBCODE'] and row['COO_BIBCODE'] not in simbadbadcoordbib:
             csources = source
-            if row['COO_BIBCODE'] not in badurlbibname and row['COO_BIBCODE'] != 'url:vsnet':
-			csources = ','.join(
+            if row['COO_BIBCODE'] not in badurlbibname:
+		csources = ','.join(
                     [source, catalog.entries[name].add_source(
                        bibcode=row['COO_BIBCODE'])])
             catalog.entries[name].add_quantity(CATACLYSMIC.RA,
