@@ -2708,7 +2708,7 @@ if args.writecatalog and not args.eventlist:
             f.write(sitemapxml)
 
         # Ping Google to let them know sitemap has been updated
-        response = urllib.request.urlopen(googlepingurl)
+        #response = urllib.request.urlopen(googlepingurl)
 
     # Prune extraneous fields not required for main catalog file
     catalogcopy = OrderedDict()
