@@ -9,7 +9,7 @@ The Astrocats package enables astronomers to construct their own curated catalog
 
 * [The Open Supernova Catalog](https://sne.space) [[GitHub repo](https://github.com/astrocatalogs/supernovae)]
 * [The Open TDE Catalog](https://tde.space) [[GitHub repo](https://github.com/astrocatalogs/tidaldisruptions)]
-* [The Open Nova Catalog](https://opennova.space) [[GitHub repo](https://github.com/astrocatalogs/novae)]
+* The Open Nova Catalog [[GitHub repo](https://github.com/astrocatalogs/novae)]
 * [The Open Black Hole Catalog](https://holes.space) [[GitHub repo](https://github.com/astrocatalogs/blackholes)]
 * [The Open Cataclysmic Variable Catalog](https://depts.washington.edu/catvar/) [[GitHub repo](https://github.com/Astrocats-Cataclysmic-Variable-Catalog/Cataclysmic-Varible-Astrocats)]
 
