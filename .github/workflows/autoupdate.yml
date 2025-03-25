@@ -3,10 +3,10 @@
 
 name: autoupdate
 
-#on: push
-on:
-  schedule:
-    - cron: '0 0 * * *' # Daily at midnight
+on: push
+#on:
+#  schedule:
+#    - cron: '0 0 * * *' # Daily at midnight
 jobs:
   build:
 
