@@ -12,10 +12,10 @@ jobs:
 
 #    runs-on: ubuntu-latest
 #    runs-on: ubuntu-24.04
-    runs-on: darwin
+    runs-on: win32
     strategy:
       matrix:
-        python-version: [3.8.12]
+        python-version: [3.8.10]
 
     steps:
       - uses: actions/checkout@v2
