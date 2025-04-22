@@ -442,60 +442,60 @@ def do_cleanup(catalog):
                                 cd.value, sig=bestsig),
                             sources,
                             derived=True)
-        if CATACLYSMIC.HOST_REDSHIFT in catalog.entries[name]:
-            # Find the "best" redshift to use for this
-            bestz, bestkind, bestsig, bestsrc = catalog.entries[
-                name].get_best_redshift(CATACLYSMIC.HOST_REDSHIFT)
-            if bestsig > 0:
-                try:
-                    bestz = float(bestz)
-                except Exception:
-                    print(catalog.entries[name])
-                    raise
-                if CATACLYSMIC.HOST_VELOCITY not in catalog.entries[name]:
-                    source = catalog.entries[name].add_self_source()
-                    # FIX: what's happening here?!
-                    pnum = CLIGHT / KM * \
-                        ((bestz + 1.)**2. - 1.) / ((bestz + 1.)**2. + 1.)
-                    pnum = pretty_num(pnum, sig=bestsig)
-                    catalog.entries[name].add_quantity(
-                        CATACLYSMIC.HOST_VELOCITY,
-                        pnum,
-                        source,
-                        kind=(CATACLYSMIC.HOST_VELOCITY.kind_preference[bestkind]
-                              if bestkind else ''))
-                if bestz > 0.:
-                    if CATACLYSMIC.HOST_LUM_DIST not in catalog.entries[name]:
-                        dl = cosmo.luminosity_distance(bestz)
-                        sources = [
-                            catalog.entries[name].add_self_source(),
-                            catalog.entries[name]
-                            .add_source(bibcode='2016A&A...594A..13P')
-                        ]
-                        sources = uniq_cdl(sources + bestsrc.split(','))
-                        catalog.entries[name].add_quantity(
-                            CATACLYSMIC.HOST_LUM_DIST,
-                            pretty_num(
-                                dl.value, sig=bestsig + 1),
-                            sources,
-                            kind=(CATACLYSMIC.HOST_LUM_DIST.kind_preference[
-                                bestkind] if bestkind else ''),
-                            derived=True)
-                    if CATACLYSMIC.HOST_COMOVING_DIST not in catalog.entries[
-                            name]:
-                        cd = cosmo.comoving_distance(bestz)
-                        sources = [
-                            catalog.entries[name].add_self_source(),
-                            catalog.entries[name]
-                            .add_source(bibcode='2016A&A...594A..13P')
-                        ]
-                        sources = uniq_cdl(sources + bestsrc.split(','))
-                        catalog.entries[name].add_quantity(
-                            CATACLYSMIC.HOST_COMOVING_DIST,
-                            pretty_num(
-                                cd.value, sig=bestsig),
-                            sources,
-                            derived=True)
+#        if CATACLYSMIC.HOST_REDSHIFT in catalog.entries[name]:
+#            # Find the "best" redshift to use for this
+#            bestz, bestkind, bestsig, bestsrc = catalog.entries[
+#                name].get_best_redshift(CATACLYSMIC.HOST_REDSHIFT)
+#            if bestsig > 0:
+#                try:
+#                    bestz = float(bestz)
+#                except Exception:
+#                    print(catalog.entries[name])
+#                    raise
+#                if CATACLYSMIC.HOST_VELOCITY not in catalog.entries[name]:
+#                    source = catalog.entries[name].add_self_source()
+#                    # FIX: what's happening here?!
+#                    pnum = CLIGHT / KM * \
+#                        ((bestz + 1.)**2. - 1.) / ((bestz + 1.)**2. + 1.)
+#                    pnum = pretty_num(pnum, sig=bestsig)
+#                    catalog.entries[name].add_quantity(
+#                        CATACLYSMIC.HOST_VELOCITY,
+#                        pnum,
+#                        source,
+#                        kind=(CATACLYSMIC.HOST_VELOCITY.kind_preference[bestkind]
+#                              if bestkind else ''))
+#                if bestz > 0.:
+#                    if CATACLYSMIC.HOST_LUM_DIST not in catalog.entries[name]:
+#                        dl = cosmo.luminosity_distance(bestz)
+#                        sources = [
+#                            catalog.entries[name].add_self_source(),
+#                            catalog.entries[name]
+#                            .add_source(bibcode='2016A&A...594A..13P')
+#                        ]
+#                        sources = uniq_cdl(sources + bestsrc.split(','))
+#                        catalog.entries[name].add_quantity(
+#                            CATACLYSMIC.HOST_LUM_DIST,
+#                            pretty_num(
+#                                dl.value, sig=bestsig + 1),
+#                            sources,
+#                            kind=(CATACLYSMIC.HOST_LUM_DIST.kind_preference[
+#                                bestkind] if bestkind else ''),
+#                            derived=True)
+#                    if CATACLYSMIC.HOST_COMOVING_DIST not in catalog.entries[
+#                            name]:
+#                        cd = cosmo.comoving_distance(bestz)
+#                        sources = [
+#                            catalog.entries[name].add_self_source(),
+#                            catalog.entries[name]
+#                            .add_source(bibcode='2016A&A...594A..13P')
+#                        ]
+#                        sources = uniq_cdl(sources + bestsrc.split(','))
+#                        catalog.entries[name].add_quantity(
+#                            CATACLYSMIC.HOST_COMOVING_DIST,
+#                            pretty_num(
+#                                cd.value, sig=bestsig),
+#                            sources,
+#                            derived=True)
         if all([
                 x in catalog.entries[name]
                 for x in [
