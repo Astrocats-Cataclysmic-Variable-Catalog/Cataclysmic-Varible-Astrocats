@@ -25,7 +25,7 @@ def do_cleanup(catalog):
     keys = list(catalog.entries.keys())
 
     cleanupcnt = 0
-    for oname in pbar(keys, task_str):
+    for oname in pbar(keys, task_str)[1:]:
         # Some events may be merged in cleanup process, skip them if
         # non-existent.
         try:
