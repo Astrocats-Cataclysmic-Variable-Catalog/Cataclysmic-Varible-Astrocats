@@ -15,7 +15,7 @@ jobs:
 #    runs-on: win32
     strategy:
       matrix:
-        python-version: [3.8.12]
+        python-version: [3.7]
 
     steps:
       - uses: actions/checkout@v2
