@@ -15,7 +15,7 @@ from astropy.cosmology import z_at_value
 
 from ..constants import CLIGHT, KM
 from astrocats.cataclysmic.cataclysmic import CATACLYSMIC
-# Editors note, Line 207 has been commented out for the use of cataclysmic variables and 361-444
+# Editors note, Line 207 has been commented out for the use of cataclysmic variables and 361-444 and 531-562
 
 def do_cleanup(catalog):
     """Cleanup catalog after importing all data."""
@@ -528,38 +528,38 @@ def do_cleanup(catalog):
                     .split(',') + catalog.entries[name][CATACLYSMIC.HOST_RA][0][
                         QUANTITY.SOURCE].split(',') + catalog.entries[name][
                             CATACLYSMIC.HOST_DEC][0][QUANTITY.SOURCE].split(','))
-                if CATACLYSMIC.HOST_OFFSET_ANG not in catalog.entries[name]:
-                    hosa = Decimal(c1.separation(c2).arcsecond)
-                    hosa = pretty_num(hosa)
-                    catalog.entries[name].add_quantity(
-                        CATACLYSMIC.HOST_OFFSET_ANG,
-                        hosa,
-                        sources,
-                        derived=True,
-                        u_value='arcseconds')
-                if (CATACLYSMIC.COMOVING_DIST in catalog.entries[name] and
-                        CATACLYSMIC.REDSHIFT in catalog.entries[name] and
-                        CATACLYSMIC.HOST_OFFSET_DIST not in
-                        catalog.entries[name]):
-                    offsetsig = get_sig_digits(catalog.entries[name][
-                        CATACLYSMIC.HOST_OFFSET_ANG][0][QUANTITY.VALUE])
-                    sources = uniq_cdl(
-                        sources.split(',') + (catalog.entries[name][
-                            CATACLYSMIC.COMOVING_DIST][0][QUANTITY.SOURCE]).
-                        split(',') + (catalog.entries[name][CATACLYSMIC.REDSHIFT]
-                                      [0][QUANTITY.SOURCE]).split(','))
-                    (catalog.entries[name].add_quantity(
-                        CATACLYSMIC.HOST_OFFSET_DIST,
-                        pretty_num(
-                            float(catalog.entries[name][
-                                CATACLYSMIC.HOST_OFFSET_ANG][0][QUANTITY.VALUE])
-                            / 3600. * (pi / 180.) *
-                            float(catalog.entries[name][
-                                CATACLYSMIC.COMOVING_DIST][0][QUANTITY.VALUE]) *
-                            1000. / (1.0 + float(catalog.entries[name][
-                                CATACLYSMIC.REDSHIFT][0][QUANTITY.VALUE])),
-                            sig=offsetsig),
-                        sources))
+#                if CATACLYSMIC.HOST_OFFSET_ANG not in catalog.entries[name]:
+#                    hosa = Decimal(c1.separation(c2).arcsecond)
+#                    hosa = pretty_num(hosa)
+#                    catalog.entries[name].add_quantity(
+#                        CATACLYSMIC.HOST_OFFSET_ANG,
+#                        hosa,
+#                        sources,
+#                        derived=True,
+#                        u_value='arcseconds')
+#                if (CATACLYSMIC.COMOVING_DIST in catalog.entries[name] and
+#                        CATACLYSMIC.REDSHIFT in catalog.entries[name] and
+#                        CATACLYSMIC.HOST_OFFSET_DIST not in
+#                        catalog.entries[name]):
+#                    offsetsig = get_sig_digits(catalog.entries[name][
+#                        CATACLYSMIC.HOST_OFFSET_ANG][0][QUANTITY.VALUE])
+#                    sources = uniq_cdl(
+#                        sources.split(',') + (catalog.entries[name][
+#                            CATACLYSMIC.COMOVING_DIST][0][QUANTITY.SOURCE]).
+#                        split(',') + (catalog.entries[name][CATACLYSMIC.REDSHIFT]
+#                                      [0][QUANTITY.SOURCE]).split(','))
+#                    (catalog.entries[name].add_quantity(
+#                        CATACLYSMIC.HOST_OFFSET_DIST,
+#                        pretty_num(
+#                            float(catalog.entries[name][
+#                                CATACLYSMIC.HOST_OFFSET_ANG][0][QUANTITY.VALUE])
+#                            / 3600. * (pi / 180.) *
+#                            float(catalog.entries[name][
+#                                CATACLYSMIC.COMOVING_DIST][0][QUANTITY.VALUE]) *
+#                            1000. / (1.0 + float(catalog.entries[name][
+#                                CATACLYSMIC.REDSHIFT][0][QUANTITY.VALUE])),
+#                            sig=offsetsig),
+#                        sources))
 
         catalog.entries[name].sanitize()
         catalog.journal_entries(bury=True, final=True, gz=True)
