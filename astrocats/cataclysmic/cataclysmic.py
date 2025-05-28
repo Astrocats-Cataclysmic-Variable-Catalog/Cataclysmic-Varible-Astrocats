@@ -437,7 +437,6 @@ class Cataclysmic(Entry):
 
     def sanitize(self):
         super(Cataclysmic, self).sanitize()
-        print("cataclysmic sanity check")
         # Calculate some columns based on imported data, sanitize some fields
         name = self[self._KEYS.NAME]
         aliases = self.get_aliases()
