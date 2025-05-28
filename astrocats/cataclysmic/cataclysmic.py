@@ -469,8 +469,7 @@ class Cataclysmic(Entry):
                 if SOURCE.BIBCODE in source:
                     import urllib
                     from html import unescape
-                    import time
-                    cu_s = time.time()
+
                     # First sanitize the bibcode
                     if len(source[SOURCE.BIBCODE]) != 19:
                         source[SOURCE.BIBCODE] = urllib.parse.unquote(
@@ -482,15 +481,12 @@ class Cataclysmic(Entry):
 
                     if (source[SOURCE.BIBCODE] not in
                             self.catalog.bibauthor_dict):
-                        cu_1 = time.time()
-                        print("cataclysmic 1",cu_1-cu_s)
                         bibcode = source[SOURCE.BIBCODE]
                         adsquery = (self.catalog.ADS_BIB_URL +
                                     urllib.parse.quote(bibcode) +
                                     '&data_type=Custom&format=%253m%20%25(y)')
                         bibcodeauthor = ''
-                        cu_2 = time.time()
-                        print("catalcysmic 2", cu_2-cu_1)
+
                         try:
                             response = urllib.request.urlopen(adsquery)
                             html = response.read().decode('utf-8')
@@ -499,18 +495,13 @@ class Cataclysmic(Entry):
                                 bibcodeauthor = hsplit[5]
                         except:
                             pass
-                        cu_3 = time.time()
-                        print("cataclysmic 3", cu_3-cu_2)
+                        if bibcode == '2000A&AS..143....9W':
+                            bibcodeauthor = 'Wegner, M'
                         if not bibcodeauthor:
-                            cu_4 = time.time()
-                            print("cataclysmic 4", cu_4-cu_3)
-                            print(bibcode)
-                            print(adsquery)
                             warnings.warn(
                                 "Bibcode didn't return authors, not converting"
-                                "this bibcode. Bibcode:"+str(bibcode)+" adsquery:"+str(adsquery)+"time:"+str(cu_4-cu_2))
-                        cu_5 = time.time()
-                        print("cataclysmic 5",cu_5-cu_3)
+                                "this bibcode. Bibcode:"+str(bibcode))
+
                         self.catalog.bibauthor_dict[bibcode] = unescape(
                             bibcodeauthor).strip()
 
