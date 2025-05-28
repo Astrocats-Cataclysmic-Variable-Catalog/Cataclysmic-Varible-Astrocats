@@ -495,11 +495,14 @@ class Cataclysmic(Entry):
                                 bibcodeauthor = hsplit[5]
                         except:
                             pass
-                        if bibcode == '2000A&AS..143....9W':
+                        if not bibcodeauthor and bibcode == '2000A&AS..143....9W':
                             bibcodeauthor = 'Wegner, M'
+                        if not bibcodeauthor and bibcode == '2020yCat.1350....0G':
+                            bibcodeauthor = 'Gaia Collaberation'
                         if not bibcodeauthor:
                             warnings.warn(
-                                "Bibcode didn't return authors, not converting this bibcode. Bibcode:"+str(bibcode))
+                                "Bibcode didn't return authors, not converting"
+                                "this bibcode.")
 
                         self.catalog.bibauthor_dict[bibcode] = unescape(
                             bibcodeauthor).strip()
