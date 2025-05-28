@@ -470,7 +470,7 @@ class Cataclysmic(Entry):
                     import urllib
                     from html import unescape
                     import time
-                    uc_s = time.time()
+                    cu_s = time.time()
                     # First sanitize the bibcode
                     if len(source[SOURCE.BIBCODE]) != 19:
                         source[SOURCE.BIBCODE] = urllib.parse.unquote(
