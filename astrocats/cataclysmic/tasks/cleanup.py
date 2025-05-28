@@ -28,7 +28,7 @@ def do_cleanup(catalog):
     cu_1 = time.time()
     print("1",cu_1-cu_s)
     cleanupcnt = 0
-    print("sanity check 1)
+    print("sanity check 1")
     for oname in pbar(keys, task_str):
         # Some events may be merged in cleanup process, skip them if
         # non-existent.
