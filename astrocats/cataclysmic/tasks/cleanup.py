@@ -4,7 +4,6 @@ import statistics
 import warnings
 from decimal import Decimal
 from math import log10, pi, sqrt
-import time
 
 from astrocats.catalog.quantity import QUANTITY
 from astrocats.catalog.utils import (get_sig_digits, is_number, pbar,
@@ -20,23 +19,15 @@ from astrocats.cataclysmic.cataclysmic import CATACLYSMIC
 
 def do_cleanup(catalog):
     """Cleanup catalog after importing all data."""
-    cu_s = time.time()
     task_str = catalog.get_current_task_str()
     # Set preferred names, calculate some columns based on imported data,
     # sanitize some fields
     keys = list(catalog.entries.keys())
-    cu_1 = time.time()
-    print("1",cu_1-cu_s)
     cleanupcnt = 0
-    print("sanity check 1")
     for oname in pbar(keys, task_str):
         # Some events may be merged in cleanup process, skip them if
         # non-existent.
-        print("sanity check 2")
         try:
-            print("sanity check 3")
-            print(oname)
-            print("sanity check 4")
             name = catalog.add_entry(oname)
         except Exception:
             catalog.log.warning(
@@ -50,8 +41,6 @@ def do_cleanup(catalog):
         aliases = catalog.entries[name].get_aliases()
         catalog.entries[name].purge_bandless_photometry()
         catalog.entries[name].set_first_max_light()
-        cu_2 = time.time()
-        print("2",cu_2-cu_1)
         if CATACLYSMIC.DISCOVER_DATE not in catalog.entries[name]:
             prefixes = ['MLS', 'SSS', 'CSS', 'GRB ']
             for alias in aliases:
@@ -75,8 +64,6 @@ def do_cleanup(catalog):
                         break
                 if CATACLYSMIC.DISCOVER_DATE in catalog.entries[name]:
                     break
-        cu_3 = time.time()
-        print("3",cu_3-cu_2)
         if CATACLYSMIC.DISCOVER_DATE not in catalog.entries[name]:
             prefixes = [
                 'ASASSN-', 'PS1-', 'PS1', 'PS', 'iPTF', 'PTF', 'SCP-', 'SNLS-',
@@ -101,8 +88,6 @@ def do_cleanup(catalog):
                         break
                 if CATACLYSMIC.DISCOVER_DATE in catalog.entries[name]:
                     break
-        cu_4 = time.time()
-        print("4",cu_4-cu_3)
         if CATACLYSMIC.DISCOVER_DATE not in catalog.entries[name]:
             prefixes = ['SNF']
             for alias in aliases:
@@ -126,8 +111,6 @@ def do_cleanup(catalog):
                         break
                 if CATACLYSMIC.DISCOVER_DATE in catalog.entries[name]:
                     break
-        cu_5 = time.time()
-        print("5",cu_5-cu_4)
         if CATACLYSMIC.DISCOVER_DATE not in catalog.entries[name]:
             prefixes = ['PTFS', 'SNSDF']
             for alias in aliases:
@@ -150,8 +133,6 @@ def do_cleanup(catalog):
                         break
                 if CATACLYSMIC.DISCOVER_DATE in catalog.entries[name]:
                     break
-        cu_6 = time.time()
-        print("6", cu_6-cu_5)
         if CATACLYSMIC.DISCOVER_DATE not in catalog.entries[name]:
             prefixes = ['AT', 'CV', 'OGLE-', 'SM ', 'KSN']
             for alias in aliases:
@@ -179,8 +160,6 @@ def do_cleanup(catalog):
                             break
                 if CATACLYSMIC.DISCOVER_DATE in catalog.entries[name]:
                     break
-        cu_7 = time.time()
-        print("7",cu_7-cu_6)
         if (CATACLYSMIC.RA not in catalog.entries[name] or
                 CATACLYSMIC.DEC not in catalog.entries[name]):
             prefixes = [
@@ -216,8 +195,6 @@ def do_cleanup(catalog):
                         break
                 if CATACLYSMIC.RA in catalog.entries[name]:
                     break
-        cu_8 = time.time()
-        print("8",cu_8-cu_7)
         no_host = (CATACLYSMIC.HOST not in catalog.entries[name] or not any([
             x[QUANTITY.VALUE] == 'Milky Way'
             for x in catalog.entries[name][CATACLYSMIC.HOST]
@@ -284,8 +261,6 @@ def do_cleanup(catalog):
                     break
                 if CATACLYSMIC.HOST_RA in catalog.entries[name]:
                     break
-        cu_9 = time.time()
-        print("9",cu_9-cu_8)
         if (CATACLYSMIC.REDSHIFT not in catalog.entries[name] and
                 CATACLYSMIC.VELOCITY in catalog.entries[name]):
             # Find the "best" velocity to use for this
@@ -307,8 +282,6 @@ def do_cleanup(catalog):
                     sources,
                     kind='heliocentric',
                     derived=True))
-        cu_10 = time.time()
-        print("10",cu_10-cu_9)
         if (CATACLYSMIC.REDSHIFT not in catalog.entries[name] and
                 len(catalog.nedd_dict) > 0 and
                 CATACLYSMIC.HOST in catalog.entries[name]):
@@ -334,8 +307,6 @@ def do_cleanup(catalog):
                         uniq_cdl([source, secondarysource]),
                         kind='host',
                         derived=True)
-        cu_11 = time.time()
-        print("11",cu_11-cu_10)
         if (CATACLYSMIC.MAX_ABS_MAG not in catalog.entries[name] and
                 CATACLYSMIC.MAX_APP_MAG in catalog.entries[name] and
                 CATACLYSMIC.LUM_DIST in catalog.entries[name]):
@@ -360,8 +331,6 @@ def do_cleanup(catalog):
                 pnum = pretty_num(pnum, sig=bestsig + 1)
                 catalog.entries[name].add_quantity(
                     CATACLYSMIC.MAX_ABS_MAG, pnum, sources, derived=True)
-        cu_12 = time.time()
-        print("12",cu_12-cu_11)
         if (CATACLYSMIC.MAX_VISUAL_ABS_MAG not in catalog.entries[name] and
                 CATACLYSMIC.MAX_VISUAL_APP_MAG in catalog.entries[name] and
                 CATACLYSMIC.LUM_DIST in catalog.entries[name]):
@@ -522,8 +491,6 @@ def do_cleanup(catalog):
 #                                cd.value, sig=bestsig),
 #                            sources,
 #                            derived=True)
-        cu_13 = time.time()
-        print("13",cu_13-cu_12)
         if all([
                 x in catalog.entries[name]
                 for x in [
@@ -556,8 +523,6 @@ def do_cleanup(catalog):
                     .split(',') + catalog.entries[name][CATACLYSMIC.HOST_RA][0][
                         QUANTITY.SOURCE].split(',') + catalog.entries[name][
                             CATACLYSMIC.HOST_DEC][0][QUANTITY.SOURCE].split(','))
-        cu_14 = time.time()
-        print("14",cu_14-cu_13)
 #                if CATACLYSMIC.HOST_OFFSET_ANG not in catalog.entries[name]:
 #                    hosa = Decimal(c1.separation(c2).arcsecond)
 #                    hosa = pretty_num(hosa)
@@ -596,8 +561,6 @@ def do_cleanup(catalog):
         cleanupcnt = cleanupcnt + 1
         if catalog.args.travis and cleanupcnt % 1000 == 0:
             break
-        cu_15 = time.time()
-        print("15",cu_15-cu_14)
     catalog.save_caches()
 
     return
