@@ -486,20 +486,14 @@ class Cataclysmic(Entry):
                                     urllib.parse.quote(bibcode) +
                                     '&data_type=Custom&format=%253m%20%25(y)')
                         bibcodeauthor = ''
-  
-                        if not bibcodeauthor and bibcode == '2000A&AS..143....9W':
-                            bibcodeauthor = 'Wegner, M'
-                        if not bibcodeauthor and bibcode == '2020yCat.1350....0G':
-                            bibcodeauthor = 'Gaia Collaberation'
-                        if not bibcodeauthor:
-                            try:
-                                response = urllib.request.urlopen(adsquery)
-                                html = response.read().decode('utf-8')
-                                hsplit = html.split("\n")
-                                if len(hsplit) > 5:
-                                    bibcodeauthor = hsplit[5]
-                            except:
-                                pass
+                        try:
+                            response = urllib.request.urlopen(adsquery)
+                            html = response.read().decode('utf-8')
+                            hsplit = html.split("\n")
+                            if len(hsplit) > 5:
+                                bibcodeauthor = hsplit[5]
+                        except:
+                            pass
 
                         if not bibcodeauthor:
                             warnings.warn(
