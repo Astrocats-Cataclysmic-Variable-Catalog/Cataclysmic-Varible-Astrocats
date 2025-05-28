@@ -43,7 +43,9 @@ class Catalog(object):
     OSC_NAME = 'The Open Cataclysmic Variable Catalog'
     OSC_URL = 'http://depts.washington.edu/catvar/'
 
-    ADS_BIB_URL = ("http://cdsads.u-strasbg.fr/cgi-bin/nph-abs_connect?"
+#    ADS_BIB_URL = ("http://cdsads.u-strasbg.fr/cgi-bin/nph-abs_connect?"
+#                   "db_key=ALL&version=1&bibcode=")
+    ADS_BIB_URL = ("https://cdsarc.u-strasbg.fr/cgi-bin/nph-abs_connect?"
                    "db_key=ALL&version=1&bibcode=")
 
     TRAVIS_QUERY_LIMIT = 10
