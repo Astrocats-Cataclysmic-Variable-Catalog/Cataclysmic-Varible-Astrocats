@@ -28,11 +28,15 @@ def do_cleanup(catalog):
     cu_1 = time.time()
     print("1",cu_1-cu_s)
     cleanupcnt = 0
+    print("sanity check 1)
     for oname in pbar(keys, task_str):
         # Some events may be merged in cleanup process, skip them if
         # non-existent.
+        print("sanity check 2")
         try:
+            print("sanity check 3")
             print(oname)
+            print("sanity check 4")
             name = catalog.add_entry(oname)
         except Exception:
             catalog.log.warning(
