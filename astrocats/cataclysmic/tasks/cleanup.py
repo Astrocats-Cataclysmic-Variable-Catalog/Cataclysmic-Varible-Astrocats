@@ -32,9 +32,8 @@ def do_cleanup(catalog):
         # Some events may be merged in cleanup process, skip them if
         # non-existent.
         try:
-            name = catalog.add_entry(oname)
             print(oname)
-            print(name)
+            name = catalog.add_entry(oname)
         except Exception:
             catalog.log.warning(
                 '"{}" was not found, suggests merge occurred in cleanup '
@@ -43,7 +42,7 @@ def do_cleanup(catalog):
 
         # Set the preferred name, switching to that name if name changed.
         name = catalog.entries[name].set_preferred_name()
-        print(name)
+      
         aliases = catalog.entries[name].get_aliases()
         catalog.entries[name].purge_bandless_photometry()
         catalog.entries[name].set_first_max_light()
