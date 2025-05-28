@@ -3,10 +3,10 @@
 
 name: autoupdate
 
-on: push
-#on:
-#  schedule:
-#    - cron: '0 0 * * *' # Daily at midnight
+#on: push
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight
 jobs:
   build:
 #    runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
       - name: importing
         run: |
           python -m astrocats setup
-          python -m astrocats cataclysmic import --debug
+          python -m astrocats cataclysmic import
       - name: generating catalog
         run: |
           python -m astrocats.scripts.webcat -c cv
