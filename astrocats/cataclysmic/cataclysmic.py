@@ -499,8 +499,7 @@ class Cataclysmic(Entry):
                             bibcodeauthor = 'Wegner, M'
                         if not bibcodeauthor:
                             warnings.warn(
-                                "Bibcode didn't return authors, not converting"
-                                "this bibcode. Bibcode:"+str(bibcode))
+                                "Bibcode didn't return authors, not converting this bibcode. Bibcode:"+str(bibcode))
 
                         self.catalog.bibauthor_dict[bibcode] = unescape(
                             bibcodeauthor).strip()
