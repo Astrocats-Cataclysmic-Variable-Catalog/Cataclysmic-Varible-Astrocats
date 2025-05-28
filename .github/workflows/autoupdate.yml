@@ -32,7 +32,7 @@ jobs:
       - name: importing
         run: |
           python -m astrocats setup
-          python -m astrocats cataclysmic import
+          python -m astrocats cataclysmic import --debug
       - name: generating catalog
         run: |
           python -m astrocats.scripts.webcat -c cv
