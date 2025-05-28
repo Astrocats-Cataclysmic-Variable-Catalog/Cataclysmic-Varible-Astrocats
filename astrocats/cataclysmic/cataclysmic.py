@@ -437,7 +437,7 @@ class Cataclysmic(Entry):
 
     def sanitize(self):
         super(Cataclysmic, self).sanitize()
-
+        print("cataclysmic sanity check")
         # Calculate some columns based on imported data, sanitize some fields
         name = self[self._KEYS.NAME]
         aliases = self.get_aliases()
@@ -502,13 +502,15 @@ class Cataclysmic(Entry):
                         cu_3 = time.time()
                         print("cataclysmic 3", cu_3-cu_2)
                         if not bibcodeauthor:
+                            cu_4 = time.time()
+                            print("cataclysmic 4", cu_4-cu_3)
                             print(bibcode)
                             print(adsquery)
                             warnings.warn(
                                 "Bibcode didn't return authors, not converting"
-                                "this bibcode.")
-                        cu_4 = time.time()
-                        print("cataclysmic 4",cu_4-cu_3)
+                                "this bibcode. Hey its me, is this working?")
+                        cu_5 = time.time()
+                        print("cataclysmic 5",cu_5-cu_3)
                         self.catalog.bibauthor_dict[bibcode] = unescape(
                             bibcodeauthor).strip()
 
