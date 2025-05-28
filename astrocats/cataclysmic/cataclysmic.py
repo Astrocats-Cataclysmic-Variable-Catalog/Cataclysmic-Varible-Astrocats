@@ -508,7 +508,7 @@ class Cataclysmic(Entry):
                             print(adsquery)
                             warnings.warn(
                                 "Bibcode didn't return authors, not converting"
-                                "this bibcode. Hey its me, is this working?")
+                                "this bibcode. Bibcode:"+str(bibcode)+" adsquery:"+str(adsquery)+"time:"+str(cu_4-cu_2))
                         cu_5 = time.time()
                         print("cataclysmic 5",cu_5-cu_3)
                         self.catalog.bibauthor_dict[bibcode] = unescape(
