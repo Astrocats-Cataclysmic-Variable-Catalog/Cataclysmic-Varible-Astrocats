@@ -28,7 +28,7 @@ def do_simbad(catalog):
     simbadbannednames = ['SN']
     customSimbad = Simbad()
     customSimbad.ROW_LIMIT = -1
-    customSimbad.TIMEOUT = 120
+    customSimbad.TIMEOUT = 320
     customSimbad.add_votable_fields('otype', 'sptype', 'sp_bibcode', 'id')
     table = []
     print(customSimbad.SIMBAD_URL)
