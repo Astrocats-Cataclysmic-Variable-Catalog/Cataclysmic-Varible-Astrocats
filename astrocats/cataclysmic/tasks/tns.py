@@ -23,8 +23,9 @@ def do_tns(catalog):
     """Load TNS metadata."""
     session = requests.Session()
     task_str = catalog.get_current_task_str()
-    tns_url = 'https://wis-tns.weizmann.ac.il/'
-    search_url = ('https://wis-tns.weizmann.ac.il/'+
+    #tns_url = 'https://wis-tns.weizmann.ac.il/'
+    tns_url = 'https://wis-tns.org/'
+    search_url = ('https://wis-tns.org/'+
                   'search?&discovered_period_value=30&discovered_period_units=years'+
                   '&unclassified_at=0&classified_sne=0&include_frb=0&name=&name_like=0'+
                   '&isTNS_AT=all&public=all&ra=&decl=&radius=&coords_unit=arcsec&reporting_groupid%5B%5D=null'+
