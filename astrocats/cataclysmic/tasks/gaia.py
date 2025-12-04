@@ -15,7 +15,7 @@ def do_gaia(catalog):
     task_str = catalog.get_current_task_str()
     fname = os.path.join(catalog.get_current_task_repo(), 'GAIA/alerts.csv')
     csvtxt = catalog.load_url('http://gsaweb.ast.cam.ac.uk/alerts/alerts.csv',
-                              fname)
+                              fname,timeout=320)
     if not csvtxt:
         return
     tsvin = list(
