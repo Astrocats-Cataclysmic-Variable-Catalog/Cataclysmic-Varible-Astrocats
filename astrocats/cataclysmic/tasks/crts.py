@@ -23,7 +23,11 @@ def do_crts(catalog):
             'http://nesssi.cacr.caltech.edu/' + fold + '/' + files[fi],
             os.path.join(catalog.get_current_task_repo(), 'CRTS', fold + '-' +
                          files[fi]), archived_mode=('arch' in files[fi]))
-        html = html.replace('<ahref=', '<a href=')
+		try:
+			html = html.replace('<ahref=', '<a href=')
+		except Exception:
+			print(f"Failed to load {files[fi]}")
+			continue
         if not html:
             continue
         bs = BeautifulSoup(html, 'html5lib')
