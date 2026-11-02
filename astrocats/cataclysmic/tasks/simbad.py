@@ -15,6 +15,7 @@ def do_simbad(catalog):
     # the host.
     task_str = catalog.get_current_task_str()
     simbadmirrors = ['http://simbad.harvard.edu/simbad/sim-script',
+					 'https://simbad.cfa.harvard.edu/simbad/sim-script',
                      'http://simbad.u-strasbg.fr/simbad/sim-script',
 		     'https://simbad.cds.unistra.fr/simbad/sim-script']
     simbadbadcoordbib = ['2013ApJ...770..107C','url:vsnet',]
